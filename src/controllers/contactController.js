@@ -1,37 +1,47 @@
 import ContactManager from '../models/contactManager.js';
+import { HTTP_STATUS_CODES } from '../constants/httpStatusCode.js';
+import { ERROR_MESSAGES } from '../constants/errorMessages.js';
+import { HttpError } from '../middleware/httpError.js';
 
 const contactManager = new ContactManager();
 
 class ContactController {
   static getAllContacts(req, res) {
-    res.json(contactManager.getAll());
+    const contacts = contactManager.getAll();
+    res.status(HTTP_STATUS_CODES.OK).json(contacts);
   }
 
   static createContact(req, res) {
-    try {
-      const newContact = contactManager.addContact(req.body);
-      res.status(201).json(newContact);
-    } catch (err) {}
+    const newContact = contactManager.addContact(req.body);
+    if (!newContact.name || !newContact.phone) {
+      throw new HttpError(
+        ERROR_MESSAGES.VALIDATION.MISSING_REQUIRED_FIELDS,
+        HTTP_STATUS_CODES.BAD_REQUEST
+      );
+    }
+    res.status(HTTP_STATUS_CODES.CREATED).json(newContact);
   }
 
   static updateContact(req, res) {
-    try {
-      const id = parseInt(req.params.id, 10);
-      const updatedContact = contactManager.updateContactById(id, req.body);
-      res.json(updatedContact);
-    } catch (err) {
-      res.status(404).send(err.message);
+    const id = parseInt(req.params.id, 10);
+
+    const updatedContact = contactManager.updateContactById(id, req.body);
+    if (!updatedContact) {
+      throw new HttpError(
+        ERROR_MESSAGES.CONTACT.NOT_FOUND,
+        HTTP_STATUS_CODES.NOT_FOUND
+      );
     }
+
+    res.status(HTTP_STATUS_CODES.OK).json(updatedContact);
   }
 
   static deleteContact(req, res) {
-    try {
-      const id = parseInt(req.params.id, 10);
-      const deletedContact = contactManager.deleteContactById(id);
-      res.json(deletedContact);
-    } catch (err) {
-      res.status(404).send(err.message);
-    }
+    const id = parseInt(req.params.id, 10);
+
+    const deletedContact = contactManager.deleteContactById(id);
+
+    res.status(HTTP_STATUS_CODES.NO_CONTENT).send();
   }
 }
 

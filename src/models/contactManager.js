@@ -37,7 +37,7 @@ class ContactManager {
     const contactIndex = this.#findIndexById(id);
 
     if (contactIndex === -1) {
-      throw new Error('Contact not found');
+      throw new Error(ERROR_MESSAGES.CONTACT.NOT_FOUND);
     }
 
     const deletedContact = this.contacts.splice(contactIndex, 1);
