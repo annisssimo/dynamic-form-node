@@ -13,7 +13,8 @@ class ContactController {
 
   static createContact(req, res) {
     const newContact = contactManager.addContact(req.body);
-    if (!newContact.name || !newContact.phone) {
+
+    if (!newContact.firstName || !newContact.phone || !newContact.email) {
       throw new HttpError(
         ERROR_MESSAGES.VALIDATION.MISSING_REQUIRED_FIELDS,
         HTTP_STATUS_CODES.BAD_REQUEST
@@ -26,6 +27,7 @@ class ContactController {
     const id = parseInt(req.params.id, 10);
 
     const updatedContact = contactManager.updateContactById(id, req.body);
+
     if (!updatedContact) {
       throw new HttpError(
         ERROR_MESSAGES.CONTACT.NOT_FOUND,
@@ -39,7 +41,7 @@ class ContactController {
   static deleteContact(req, res) {
     const id = parseInt(req.params.id, 10);
 
-    const deletedContact = contactManager.deleteContactById(id);
+    contactManager.deleteContactById(id);
 
     res.status(HTTP_STATUS_CODES.NO_CONTENT).send();
   }

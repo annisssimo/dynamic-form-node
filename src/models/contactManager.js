@@ -1,7 +1,9 @@
+import { defaultContacts } from '../data/defaultContacts.js';
+
 class ContactManager {
   constructor() {
-    this.contacts = [];
-    this.id = 1;
+    this.contacts = defaultContacts;
+    this.id = defaultContacts.length;
   }
 
   getAll() {
