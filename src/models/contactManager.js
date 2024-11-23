@@ -47,6 +47,10 @@ class ContactManager {
     return deletedContact[0];
   }
 
+  findContactById(id) {
+    return this.contacts.find((contact) => contact.id === id);
+  }
+
   #findIndexById(id) {
     return this.contacts.findIndex((contact) => contact.id === id);
   }

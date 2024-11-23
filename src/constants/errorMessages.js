@@ -12,6 +12,7 @@ export const ERROR_MESSAGES = {
     DELETE_FAILED: 'Failed to delete contact.',
   },
   SERVER: {
+    INTERNAL_SERVER_ERROR: 'Internal server error',
     UNEXPECTED_ERROR: 'An unexpected error occurred. Please try again later.',
   },
 };
