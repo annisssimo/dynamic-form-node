@@ -1,9 +1,10 @@
 import { defaultContacts } from '../data/defaultContacts.js';
+import { ERROR_MESSAGES } from '../constants/errorMessages.js';
 
 class ContactManager {
   constructor() {
     this.contacts = defaultContacts;
-    this.id = defaultContacts.length;
+    this.id = defaultContacts.length + 1;
   }
 
   getAll() {

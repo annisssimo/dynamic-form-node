@@ -1,5 +1,6 @@
 export const defaultContacts = [
   {
+    id: 1,
     firstName: 'PAVEL',
     lastName: 'SOKOLOV',
     phone: '80441234567',
@@ -9,6 +10,7 @@ export const defaultContacts = [
     contactCategory: 'personal',
   },
   {
+    id: 2,
     firstName: 'IVAN',
     lastName: 'SMIRNOV',
     phone: '80291234567',
@@ -30,6 +32,7 @@ export const defaultContacts = [
     companyRole: 'Manager',
   },
   {
+    id: 3,
     firstName: 'MARIA',
     lastName: 'KUZNETSOVA',
     phone: '80123456789',
@@ -39,6 +42,7 @@ export const defaultContacts = [
     contactCategory: 'personal',
   },
   {
+    id: 4,
     firstName: 'PAVEL',
     lastName: 'ORLOV',
     phone: '80441234567',
@@ -60,6 +64,7 @@ export const defaultContacts = [
     companyRole: 'Developer',
   },
   {
+    id: 5,
     firstName: 'OLGA',
     lastName: 'NOVIKOVA',
     phone: '80331234567',

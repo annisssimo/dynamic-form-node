@@ -41,9 +41,15 @@ class ContactController {
   static deleteContact(req, res) {
     const id = parseInt(req.params.id, 10);
 
-    contactManager.deleteContactById(id);
-
-    res.status(HTTP_STATUS_CODES.NO_CONTENT).send();
+    try {
+      contactManager.deleteContactById(id);
+      res.status(HTTP_STATUS_CODES.NO_CONTENT).send();
+    } catch (err) {
+      throw new HttpError(
+        ERROR_MESSAGES.CONTACT.DELETE_FAILED,
+        HTTP_STATUS_CODES.NOT_FOUND
+      );
+    }
   }
 }
 
